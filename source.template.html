@@ -1,8 +1,8 @@
 <!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>블록 너머의 용 · 조현성</title><style>
 *{box-sizing:border-box}html,body{margin:0;height:100%;overflow:hidden;background:#152729;color:#f7f0d6;font-family:"Malgun Gothic",sans-serif}button{font:inherit;cursor:pointer;color:inherit}canvas{display:block;width:100%;height:100%}#hud{position:fixed;inset:0;pointer-events:none;text-shadow:0 2px 2px #0008}#top{position:absolute;left:28px;top:25px;max-width:480px}.eyebrow{font-size:11px;letter-spacing:3px;color:#d0e3bb;font-weight:bold}.objective{font-size:24px;font-weight:900;margin:9px 0 5px}.sub{font-size:13px;line-height:1.7;color:#e5e9d9}.panel{background:#162629e8;border:1px solid #a8b5a43d;box-shadow:0 8px 30px #0016;backdrop-filter:blur(8px)}#resources{position:absolute;right:28px;top:26px;padding:12px 18px;border-radius:8px;font-size:14px;line-height:1.9}#boss{display:none;position:absolute;top:26px;left:50%;width:360px;transform:translateX(-50%);text-align:center;font-size:14px;font-weight:bold}#bossbar{height:9px;background:#251831;border:1px solid #ceaae2;margin-top:8px}#bossfill{height:100%;background:#b977d1}#cross{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font:26px monospace;color:#fff;opacity:.9}#target{position:absolute;top:calc(50% + 28px);left:50%;transform:translateX(-50%);text-align:center;background:#132326be;padding:5px 12px;border-radius:4px;font-size:12px;min-width:50px}#mine{position:absolute;width:110px;height:4px;left:calc(50% - 55px);top:calc(50% + 58px);background:#1e251daa;display:none}#minefill{height:100%;background:#ecc672}#toast{position:absolute;left:50%;top:23%;transform:translateX(-50%);font-size:17px;font-weight:bold;color:#ffe0a4;text-align:center;max-width:650px}#bottom{position:absolute;left:50%;bottom:20px;transform:translateX(-50%);width:min(800px,94vw)}#vitals{display:flex;align-items:center;justify-content:space-between;margin:0 6px 10px;font-size:13px}.hearts{color:#ed715d;font-size:23px;letter-spacing:1px}#growth{font-size:12px;color:#ffd685;text-align:right}#hotbar{display:flex;gap:5px;padding:7px;background:#192728e8;border:1px solid #d9d5af6b;border-radius:8px}#hotbar button{pointer-events:auto;width:calc(100% / 9);height:66px;background:#31443c;border:1px solid #8b9e7944;border-radius:3px;position:relative;transition:.12s;color:#d7dbbe}#hotbar button.active{outline:2px solid #ffe3a1;background:#64714b;transform:translateY(-3px);color:#fff}#hotbar button.unavailable{opacity:.42}.slotnum{position:absolute;left:5px;top:3px;font-size:10px}.symbol{font-size:23px;display:block;line-height:29px}.slotlabel{font-size:10px}.slotcount{position:absolute;right:4px;bottom:4px;font-size:11px;color:#fff}#help{text-align:center;margin-top:10px;font-size:11px;color:#e4e8d6}#hurt{position:fixed;inset:0;pointer-events:none;box-shadow:inset 0 0 140px #d8232399;opacity:0}#modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(90deg,#102326e6,#10232699);z-index:4}#card{width:min(700px,92vw);padding:38px;border-radius:12px}h1{font-size:48px;line-height:1.14;margin:14px 0 20px;letter-spacing:-2px}h2{font-size:29px;margin:8px 0 18px}.lead{color:#e2e4ce;font-size:15px;line-height:1.9}#begin,.primary{border:1px solid #fff0b4;background:#ddbc78;color:#192c27;font-weight:bold;border-radius:5px;padding:14px 28px;box-shadow:0 4px #796443}.small{font-size:12px;color:#b7c7b4;line-height:1.7}.keys{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:18px 0 24px;color:#dce6d3;font-size:13px}kbd{background:#43534c;padding:3px 6px;border:1px solid #bac7ac55;border-radius:3px;font:11px monospace}#craft{position:fixed;z-index:5;inset:0;background:#102522be;display:none;align-items:center;justify-content:center}.craftcard{width:min(610px,92vw);padding:28px;border-radius:10px}.recipes{display:grid;grid-template-columns:1fr 1fr;gap:10px}.recipe{background:#334c3f;border:1px solid #abc79455;border-radius:5px;padding:15px;text-align:left}.recipe b{display:block;margin-bottom:8px}.recipe span{font-size:12px;color:#cfddbb}.recipe:disabled{opacity:.4;cursor:not-allowed}.close{border:1px solid #779181;background:transparent;padding:10px 18px;float:right;border-radius:4px}#error{display:none;position:fixed;z-index:9;inset:0;background:#152729;padding:10vh 10vw;white-space:pre-wrap;line-height:1.8}#pauseHint{position:absolute;right:28px;bottom:28px;font-size:11px;color:#dae3ce}#miniStatus{position:absolute;left:28px;bottom:28px;font-size:11px;color:#e6dfbf;line-height:1.9}#loading{margin-top:18px;font-size:13px;color:#c8d3bb}#journey{display:flex;gap:10px;margin:22px 0;font-size:11px;color:#c6d5bb}#journey span{padding:7px 10px;border-top:2px solid #719885}#heroBadge{width:120px;height:180px;float:right;margin:10px;background:linear-gradient(#617b6355,#172d2555);border-radius:8px}#endStats{font-size:14px;line-height:2.1;color:#e2e9d4;margin:20px 0}#portrait{position:absolute;left:25px;bottom:95px;width:90px;height:130px;opacity:.9;pointer-events:none}@media(max-width:900px){#top{left:15px;top:15px;max-width:350px}.objective{font-size:19px}#resources{right:15px;top:15px;font-size:11px;padding:8px}#boss{top:110px;width:300px}#miniStatus,#pauseHint{display:none}h1{font-size:36px}#card{padding:25px}.slotlabel{font-size:9px}#portrait{display:none}}
 </style></head><body>
-<canvas id="view"></canvas><div id="hud"><div id="top"><div class="eyebrow">조현성의 마인크래프트 · 짧은 생존 여정</div><div class="objective" id="objective">내 손으로 건너는 길</div><div class="sub" id="hint">나무와 돌을 캐서 용을 향할 준비를 하세요.</div></div><div id="resources" class="panel"></div><div id="boss"><span id="bossname">협곡의 용</span><div id="bossbar"><div id="bossfill"></div></div></div><div id="cross">+</div><div id="target"></div><div id="mine"><div id="minefill"></div></div><div id="toast"></div><div id="bottom"><div id="vitals"><div><span class="hearts" id="hearts"></span> <span id="armorText"></span></div><div id="growth"></div></div><div id="hotbar"></div><div id="help">WASD 이동 · 마우스/방향키 시선 · Space 점프 · Shift 가장자리 보호 · 좌클릭 사용 · 우클릭/F 설치 · E 제작 · Esc 일시정지</div></div><div id="miniStatus"></div><div id="pauseHint">1–9 도구 선택 · Q 빈손 · V 내 캐릭터</div></div><div id="hurt"></div>
-<div id="modal"><div id="card" class="panel"><div class="eyebrow">1학년 2반 22번 · 조현성</div><h1>블록 너머의 용</h1><div class="lead">한 번뿐인 생명, 아직 이어지지 않은 길.<br>나무와 돌을 캐고, 강에 다리를 놓고, 용을 쓰러뜨리세요.<br><b>함께 싸워 온 무기는 실제로 더 강해집니다.</b></div><div id="journey"><span>01 채굴과 준비</span><span>02 길 만들기</span><span>03 생존과 성장</span><span>04 용 처치</span></div><div class="keys"><span><kbd>WASD</kbd> 이동 · <kbd>Space</kbd> 점프</span><span><kbd>1–9</kbd> 도구 · <kbd>E</kbd> 캠프 제작</span><span>좌클릭 채굴 / 공격 · 활은 누르고 놓기</span><span>우클릭 블록 설치 · <kbd>Shift</kbd> 안전한 가장자리</span></div><button id="begin" disabled>자산을 불러오는 중…</button><div id="loading">내장 3D 모델 준비 중</div><p class="small">약 4~5분의 대표 구간 · 사망하면 이번 판은 즉시 종료됩니다.<br>마우스 잠금이 지원되지 않아도 드래그와 방향키로 시선을 돌릴 수 있습니다.</p></div></div>
+<canvas id="view"></canvas><div id="hud"><div id="top"><div class="eyebrow">조현성의 마인크래프트 · 짧은 생존 여정</div><div class="objective" id="objective">내 손으로 건너는 길</div><div class="sub" id="hint">나무와 돌을 캐서 용을 향할 준비를 하세요.</div></div><div id="resources" class="panel"></div><div id="boss"><span id="bossname">엔더의 용</span><div id="bossbar"><div id="bossfill"></div></div></div><div id="cross">+</div><div id="target"></div><div id="mine"><div id="minefill"></div></div><div id="toast"></div><div id="bottom"><div id="vitals"><div><span class="hearts" id="hearts"></span> <span id="armorText"></span></div><div id="growth"></div></div><div id="hotbar"></div><div id="help">WASD 이동 · 마우스/방향키 시선 · Space 점프 · Shift 가장자리 보호 · 좌클릭 사용 · 우클릭/F 설치 · E 제작 · Esc 일시정지</div></div><div id="miniStatus"></div><div id="pauseHint">1–9 도구 선택 · Q 빈손 · V 내 캐릭터</div></div><div id="hurt"></div>
+<div id="modal"><div id="card" class="panel"><div class="eyebrow">1학년 2반 22번 · 조현성</div><h1>블록 너머의 용</h1><div class="lead">한 번뿐인 생명, 아직 이어지지 않은 길.<br>나무와 돌을 캐고, 초원을 지나 지옥 포탈로. 엔더의 눈 12개를 모아 엔더의 용과 맞서세요.<br><b>함께 싸워 온 무기는 실제로 더 강해집니다.</b></div><div id="journey"><span>01 초원 준비</span><span>02 지옥 탐험</span><span>03 눈 12개</span><span>04 엔더의 용</span></div><div class="keys"><span><kbd>WASD</kbd> 이동 · <kbd>Space</kbd> 점프</span><span><kbd>1–9</kbd> 도구 · <kbd>E</kbd> 캠프 제작</span><span>좌클릭 채굴 / 공격 · 활은 누르고 놓기</span><span>우클릭 블록 설치 · <kbd>Shift</kbd> 안전한 가장자리</span></div><button id="begin" disabled>자산을 불러오는 중…</button><div id="loading">내장 3D 모델 준비 중</div><p class="small">약 4~5분의 대표 구간 · 사망하면 이번 판은 즉시 종료됩니다.<br>마우스 잠금이 지원되지 않아도 드래그와 방향키로 시선을 돌릴 수 있습니다.</p></div></div>
 <div id="craft"><div class="craftcard panel"><button class="close" id="closeCraft">돌아가기 · E</button><div class="eyebrow">시작 캠프</div><h2>가져온 재료로 준비하기</h2><div id="craftInv" class="sub"></div><div class="recipes" id="recipes"></div><p class="small">칼·활·갑옷은 한 번 제작합니다. 화살과 식량은 다시 마련할 수 있습니다.<br>이번 여정의 간소한 레시피입니다. 음식은 캠프에 장작을 주고 받습니다.</p></div></div><div id="error"></div>
 <!--OFFLINE_RUNTIME--><!--EMBEDDED_ASSETS--><script>
 /* 조현성 / task24. Actual task23 GLBs, embedded by the offline packer.
@@ -259,7 +259,18 @@
   const TYPES = Object.freeze({
     grass: 'grass_block', dirt: 'dirt_block', stone: 'stone_block',
     ore: 'iron_ore', log: 'wood_log', planks: 'wood_planks',
-    leaves: 'leaf_block', water: 'water_block'
+    leaves: 'leaf_block', water: 'water_block',
+    red: 'red_block', lava: 'lava_block', obsidian: 'obsidian_block',
+    endstone: 'endstone_block', endframe: 'endframe_block'
+  });
+  // 새 블록은 학생 GLB를 그대로 쓰고 색만 바꿔서 만든다.
+  const BASE_ASSET = Object.freeze({ red: 'stone_block', lava: 'water_block', obsidian: 'stone_block', endstone: 'stone_block', endframe: 'stone_block' });
+  const RECOLOR = Object.freeze({
+    red: { color: 0x9c2a18 },
+    lava: { color: 0xff7a18, emissive: 0xff4400, emissiveIntensity: .9 },
+    obsidian: { color: 0x18112a },
+    endstone: { color: 0xe7dfa6, emissive: 0x6b6238, emissiveIntensity: .22 },
+    endframe: { color: 0x2f8d76, emissive: 0x1d6b58, emissiveIntensity: .5 }
   });
   const ALIASES = Object.freeze(Object.fromEntries([
     ...Object.keys(TYPES).map(type => [type, type]),
@@ -271,7 +282,7 @@
   const key = (x, y, z) => `${x},${y},${z}`;
   const columnKey = (x, z) => `${x},${z}`;
   const integerCell = (x, y, z) => Number.isSafeInteger(x) && Number.isSafeInteger(y) && Number.isSafeInteger(z);
-  const solid = type => type !== null && type !== undefined && type !== 'water';
+  const solid = type => type !== null && type !== undefined && type !== 'water' && type !== 'lava';
 
   class VoxelWorld {
     constructor(scene) {
@@ -286,7 +297,7 @@
       this.dirtyTypes = new Set();
       this.meshes = [];
       this.solidMeshes = [];
-      this.bounds = { minX: -10, maxX: 10, minZ: -44, maxZ: 14 };
+      this.bounds = { minX: -200, maxX: 200, minZ: -90, maxZ: 14 };
       this.root = new this.THREE.Group();
       this.root.name = 'StudentVoxelWorld';
       this.scene.add(this.root);
@@ -376,7 +387,7 @@
       this.dirtyTypes = new Set(Object.keys(TYPES));
       const trees = [], exposedOre = [], startingStone = [];
 
-      for (let x = -10; x <= 10; x++) {
+      for (let x = -24; x <= 24; x++) {
         for (let z = -44; z <= 14; z++) {
           if (z >= 0 && z <= 4) {
             // Five full cells of open river separate the banks. Water is never solid.
@@ -395,7 +406,7 @@
       }
 
       // Mineable, visible side cliffs. There is no invisible plane beyond the map.
-      for (const x of [-11, 11]) {
+      for (const x of [-25, 25]) {
         for (let z = -44; z <= 14; z++) {
           const top = (z <= -9 ? 6 : 3) + ((Math.abs(z) + (x > 0 ? 1 : 0)) % 5 === 0 ? 1 : 0);
           for (let y = -5; y < top; y++) this.set(x, y, z, 'stone');
@@ -403,7 +414,7 @@
       }
 
       // Small side hills add relief while the central route and arena remain open.
-      for (const [cx, cz] of [[-8, 8], [8, 10], [-8, -5], [8, -5], [-8, -18], [8, -25]]) {
+      for (const [cx, cz] of [[-8, 8], [8, 10], [-8, -5], [8, -5], [-8, -18], [8, -25], [-17, 9], [17, 11], [-18, -3], [18, -4], [-17, -16], [17, -21], [-18, -28], [16, -31]]) {
         const base = cz <= -9 ? 3 : 0;
         for (let dx = -1; dx <= 1; dx++) {
           for (let dz = -1; dz <= 1; dz++) this.set(cx + dx, base, cz + dz, 'grass');
@@ -433,6 +444,115 @@
       this._tree(-8, -7, 0, trees);
       this._tree(8, -15, 3, trees);
       this._tree(-8, -24, 3, trees);
+      this._tree(-17, 12, 0, trees);
+      this._tree(17, 13, 0, trees);
+      this._tree(19, -6, 0, trees);
+      this._tree(-19, -13, 3, trees);
+      this._tree(17, -28, 3, trees);
+      // 시작 초원: 캠프 주변에 나무를 더 심는다.
+      this._tree(-11, 8, 0, trees);
+      this._tree(11, 8, 0, trees);
+      this._tree(-13, 13, 0, trees);
+      this._tree(13, 12, 0, trees);
+
+      // ---------------------------------------------------------------
+      // 지옥(Hell) 지역: 빨간 블록 지형, 용암 호수, 피글린·가스트·위더
+      // ---------------------------------------------------------------
+      const HX = -170, HZ = -60, HR = 30;
+      const EX = 170, EZ = -60, ER = 30;
+      const noiseSeed = (x, z) => { const n = Math.sin(x * 12.9898 + z * 78.233) * 43758.5453; return n - Math.floor(n); };
+      const safeHellSpot = (x, z) => {
+        const top = this.height(x, z);
+        if (top > 0 && this.get(x, top - 1, z) !== 'lava') return { x, z };
+        for (let r = 1; r <= 4; r++) {
+          for (let dx = -r; dx <= r; dx++) for (let dz = -r; dz <= r; dz++) {
+            const nx = x + dx, nz = z + dz, nt = this.height(nx, nz);
+            if (nt > 0 && this.get(nx, nt - 1, nz) !== 'lava') return { x: nx, z: nz };
+          }
+        }
+        return { x, z };
+      };
+      const flattenPad = (cx, cz, r, topY) => {
+        for (let dx = -r; dx <= r; dx++) for (let dz = -r; dz <= r; dz++) {
+          for (let y = -3; y <= topY; y++) this.set(cx + dx, y, cz + dz, 'red');
+          for (let y = topY + 1; y <= topY + 10; y++) this.remove(cx + dx, y, cz + dz);
+        }
+      };
+      const buildPortalFrame = (gx, gy, gz) => {
+        for (const dx of [-2, 2]) for (let y = gy; y <= gy + 5; y++) this.set(gx + dx, y, gz, 'obsidian');
+        for (let dx = -2; dx <= 2; dx++) { this.set(gx + dx, gy, gz, 'obsidian'); this.set(gx + dx, gy + 5, gz, 'obsidian'); }
+        for (let dx = -1; dx <= 1; dx++) for (let y = gy + 1; y <= gy + 4; y++) this.remove(gx + dx, y, gz);
+      };
+
+      let lavaCells = 0;
+      for (let x = HX - HR; x <= HX + HR; x++) {
+        for (let z = HZ - HR; z <= HZ + HR; z++) {
+          let h = Math.floor(noiseSeed(x, z) * 3.4);
+          const edge = Math.min(x - (HX - HR), (HX + HR) - x, z - (HZ - HR), (HZ + HR) - z);
+          if (edge < 3) h = Math.max(h, 5 - edge);
+          const center = Math.hypot(x - HX, z - HZ);
+          if (center < 9) h = 0;
+          const lava = edge >= 3 && (center < 9 || h === 0);
+          for (let y = -3; y <= Math.max(h, 0); y++) this.set(x, y, z, 'red');
+          if (lava) { this.set(x, 0, z, 'lava'); lavaCells++; }
+        }
+      }
+
+      // 지옥 구조물: 왕복 포탈, 앤더 포탈(무작위 위치), 눈·몹 배치 계산
+      flattenPad(HX, HZ + 24, 4, 1);
+      buildPortalFrame(HX, 2, HZ + 24);
+      const endPortalCandidates = [[-20, -12], [-20, 12], [20, -12], [20, 12]];
+      const [epdx, epdz] = endPortalCandidates[Math.floor(Math.random() * endPortalCandidates.length)];
+      const epx = HX + epdx, epz = HZ + epdz;
+      flattenPad(epx, epz, 4, 1);
+      for (let dx = -2; dx <= 2; dx++) for (let dz = -2; dz <= 2; dz++) {
+        if (Math.max(Math.abs(dx), Math.abs(dz)) !== 2 || (Math.abs(dx) === 2 && Math.abs(dz) === 2)) continue;
+        this.set(epx + dx, 1, epz + dz, 'endframe');
+      }
+
+      const hellPiglins = [];
+      for (const [dx, dz] of [[-24, -22], [24, -22], [-24, 22], [24, 22], [0, -26], [0, 26], [-26, 4], [26, -4], [-14, -6], [14, 6], [-10, 18], [10, -18]]) {
+        const s = safeHellSpot(HX + dx, HZ + dz);
+        hellPiglins.push({ x: s.x + .5, y: this.height(s.x, s.z), z: s.z + .5 });
+      }
+      const ghastSpots = [[-14, -4], [12, 10], [-20, 18], [18, -20], [0, -14]]
+        .map(([dx, dz]) => ({ x: HX + dx + .5, y: 8 + noiseSeed(HX + dx, HZ + dz) * 2.5, z: HZ + dz + .5 }));
+      const eyeSpots = [];
+      for (const [x, z] of [[-12, -12], [12, -18], [-6, -27]]) eyeSpots.push({ x: x + .5, y: this.height(x, z) + .9, z: z + .5 });
+      for (const [dx, dz] of [[-24, -24], [24, -24], [-24, 24], [24, 24], [0, -27], [0, 27], [-27, 0], [27, 0], [15, -15]]) {
+        const s = safeHellSpot(HX + dx, HZ + dz);
+        eyeSpots.push({ x: s.x + .5, y: this.height(s.x, s.z) + .9, z: s.z + .5 });
+      }
+
+      // 시작 초원 쪽으로 이어지는 지옥 포탈 (옛 용의 둥지 자리)
+      buildPortalFrame(0, 3, -36);
+
+      // ---------------------------------------------------------------
+      // 엔더(End) 지역: 창백한 엔드 돌 바닥, 흑요석 기둥 8개, 떠 있는 바위
+      // ---------------------------------------------------------------
+      for (let x = EX - ER; x <= EX + ER; x++) {
+        for (let z = EZ - ER; z <= EZ + ER; z++) {
+          this.set(x, -1, z, 'endstone');
+          this.set(x, 0, z, 'endstone');
+        }
+      }
+      const pillars = [];
+      for (let k = 0; k < 8; k++) {
+        const a = k / 8 * Math.PI * 2, px = Math.round(EX + Math.cos(a) * 20), pz = Math.round(EZ + Math.sin(a) * 20);
+        const ph = 13 + (k % 2);
+        for (let dx = -1; dx <= 1; dx++) for (let dz = -1; dz <= 1; dz++) for (let y = 0; y <= ph; y++) this.set(px + dx, y, pz + dz, 'obsidian');
+        pillars.push({ x: px, z: pz, top: ph + 1 });
+      }
+      const islands = [];
+      for (const [dx, dz, iy] of [[-27, -8, 5], [-31, 6, 8], [27, 8, 6], [31, -6, 9], [-22, -24, 4], [22, 24, 7], [-22, 24, 8], [22, -24, 5], [8, -31, 6], [-8, 31, 7], [0, 27, 10], [14, 14, 3], [-14, -14, 2], [0, -18, 9]]) {
+        const cx = EX + dx, cz = EZ + dz;
+        for (let ox = -1; ox <= 1; ox++) for (let oz = -1; oz <= 1; oz++) {
+          if (Math.abs(ox) === 1 && Math.abs(oz) === 1 && noiseSeed(cx + ox, cz + oz) < .45) continue;
+          this.set(cx + ox, iy, cz + oz, 'endstone');
+          if (noiseSeed(cx + ox * 3, cz + oz * 3) > .6) this.set(cx + ox, iy + 1, cz + oz, 'endstone');
+        }
+        islands.push({ x: cx, z: cz, y: iy });
+      }
 
       const counts = {};
       for (const type of this.cells.values()) counts[type] = (counts[type] || 0) + 1;
@@ -443,11 +563,27 @@
         bounds: { ...this.bounds },
         initialRiverCells: this.initialRiverCells.length,
         river: { minZ: 0, maxZ: 4, widthCells: 5, waterSurfaceY: -1.3, floorTopY: -4, solidAtBankHeight: 0 },
-        plateau: { minZ: -44, maxZ: -9, baseTopY: 3, surfaceCellCount: 21 * 36, centralFaceMineable: true },
-        arena: { minX: -9, maxX: 9, minZ: -44, maxZ: -32, topY: 3, surfaceCellCount: 19 * 13 },
+        plateau: { minZ: -44, maxZ: -9, baseTopY: 3, surfaceCellCount: 49 * 36, centralFaceMineable: true },
+        arena: { minX: -24, maxX: 24, minZ: -44, maxZ: -32, topY: 3, surfaceCellCount: 49 * 13 },
         startingStoneCells: startingStone,
         exposedOreCells: exposedOre,
         trees,
+        zones: {
+          overworld: { minX: -24, maxX: 24, minZ: -44, maxZ: 14 },
+          hell: { minX: HX - HR, maxX: HX + HR, minZ: HZ - HR, maxZ: HZ + HR, center: { x: HX, z: HZ }, lavaCells },
+          end: { minX: EX - ER, maxX: EX + ER, minZ: EZ - ER, maxZ: EZ + ER, center: { x: EX, z: EZ }, pillars: pillars.length, islands: islands.length }
+        },
+        portals: {
+          toHell: { x: 0.5, y: 6, z: -35.5 },
+          toHellSpawn: { x: HX + .5, y: this.height(HX, HZ + 22), z: HZ + 22.5 },
+          toHome: { x: HX + .5, y: 5, z: HZ + 24.5 },
+          toHomeSpawn: { x: 0, y: 3, z: -33 },
+          endPortal: { x: epx + .5, y: 2, z: epz + .5, eyeSlots: 12 },
+          endSpawn: { x: EX + 5.5, y: this.height(EX + 5, EZ + 24), z: EZ + 24.5 }
+        },
+        hellPiglins, ghastSpots,
+        witherSpot: { x: HX + .5, y: 9.5, z: HZ + .5 },
+        eyeSpots, pillars, islands,
         typeCounts: counts,
         totalCells: this.cells.size,
         sourceAssets: { ...TYPES },
@@ -460,13 +596,13 @@
 
     _template(type) {
       if (this.templates.has(type)) return this.templates.get(type);
-      const assets = global.GameAssets, assetId = TYPES[type];
+      const assets = global.GameAssets, assetId = BASE_ASSET[type] || TYPES[type];
       if (!assets) throw new Error('Load GameAssets before building the voxel world.');
       let source = assets.gltfs && assets.gltfs[assetId] && assets.gltfs[assetId].scene;
       if (!source && typeof assets.static === 'function') source = assets.static(assetId);
       if (!source) throw new Error('Missing original voxel GLB: ' + assetId);
       source.updateWorldMatrix(true, true);
-      const parts = [];
+      const parts = [], spec = RECOLOR[type];
       source.traverse(mesh => {
         if (!mesh.isMesh || mesh.isSkinnedMesh || !mesh.geometry) return;
         const geometry = mesh.geometry.clone();
@@ -475,7 +611,13 @@
         if (!geometry.attributes.normal) geometry.computeVertexNormals();
         geometry.computeBoundingBox();
         geometry.computeBoundingSphere();
-        parts.push({ geometry, material: mesh.material });
+        let material = mesh.material;
+        if (spec && material) {
+          material = material.clone();
+          if (spec.color !== undefined) material.color = new this.THREE.Color(spec.color);
+          if (spec.emissive) { material.emissive = new this.THREE.Color(spec.emissive); material.emissiveIntensity = spec.emissiveIntensity || 1; }
+        }
+        parts.push({ geometry, material });
       });
       if (!parts.length) throw new Error('Original voxel GLB contains no static mesh: ' + assetId);
       this.templates.set(type, parts);
@@ -483,7 +625,7 @@
     }
 
     _visible(x, y, z, type) {
-      if (type === 'water') return true;
+      if (type === 'water' || type === 'lava') return true;
       return NEIGHBORS.some(([dx, dy, dz]) => !solid(this.get(x + dx, y + dy, z + dz)));
     }
 
@@ -510,13 +652,13 @@
             mesh.name = 'Voxel_' + type;
             mesh.userData.voxelType = type;
             mesh.userData.voxelCells = cells;
-            mesh.castShadow = type !== 'water';
+            mesh.castShadow = type !== 'water' && type !== 'lava';
             mesh.receiveShadow = true;
             for (let i = 0; i < cells.length; i++) {
               const c = cells[i];
               pos.set(c.x + 0.5, c.y, c.z + 0.5);
-              // Water has a visual surface at -1.3 for its initial y=-2 cell.
-              scale.set(1, type === 'water' ? 0.7 : 1, 1);
+              // Water/lava have a visual surface at -1.3 for their initial y=-2 cell.
+              scale.set(1, (type === 'water' || type === 'lava') ? 0.7 : 1, 1);
               matrix.compose(pos, rotation, scale);
               mesh.setMatrixAt(i, matrix);
             }
@@ -530,7 +672,7 @@
         this.buckets.set(type, meshes);
       }
       this.meshes = Array.from(this.buckets.values()).flat();
-      this.solidMeshes = this.meshes.filter(mesh => mesh.userData.voxelType !== 'water');
+      this.solidMeshes = this.meshes.filter(mesh => mesh.userData.voxelType !== 'water' && mesh.userData.voxelType !== 'lava');
       this.root.updateWorldMatrix(true, true);
       this.dirtyTypes.clear();
       return true;
@@ -638,6 +780,7 @@
         ['creeper', -3, 3, -16, 44], ['enderman', -2, 3, -22, 78],
         ['piglin', 4, 3, -25, 78]
       ];
+      for (const spot of (world.metadata.hellPiglins || [])) specs.push(['piglin', spot.x, spot.y, spot.z, 78]);
       for (const [id, x, y, z, hp] of specs) {
         const rig = GameAssets.make(id), pos = V(x, y, z);
         const e = { id, rig, pos, hp, maxHp: hp, dead: false, deathT: 0, cd: 1.0,
@@ -692,7 +835,7 @@
         const x = bx + dx, y = by + dy, z = bz + dz;
         if (V(x + .5, y + .5, z + .5).distanceTo(center) > 1.45) continue;
         const type = world.get(x, y, z);
-        if (type && type !== 'water' && world.remove(x, y, z)) removed++;
+        if (type && type !== 'water' && type !== 'lava' && type !== 'obsidian' && type !== 'endframe' && world.remove(x, y, z)) removed++;
       }
       world.rebuild(); die(e, 'explosion');
       flags.creeperExploded = true;
@@ -716,6 +859,7 @@
       const target = api.enemyTarget ? api.enemyTarget() : null;
       for (const e of enemies) {
         if (!playing()) break;
+        if (e.custom) continue;
         e.rig.update(dt);
         if (e.hp <= 0 && !e.dead) die(e, 'damage');
         if (e.dead) {
@@ -801,7 +945,7 @@
         h.mesh.material.opacity = .27 + Math.abs(Math.sin(h.left * 14)) * .25;
         if (h.left > 0) continue;
         const distance = Math.hypot(player.pos.x - h.pos.x, player.pos.z - h.pos.z);
-        if (distance < 2.15 && Math.abs(player.pos.y - h.pos.y) < 1.6 && playing()) api.hurt(h.damage, 'dragon');
+        if (distance < 3.2 && Math.abs(player.pos.y - h.pos.y) < 1.9 && playing()) api.hurt(h.damage, 'dragon');
         if (!playing()) return;
         effect(h.pos.clone().add(V(0, .4, 0)), 0xaa68ef, 28); tone('dragon_attack');
         emit('dragon_hazard_resolve', { phase: h.phase, damage: h.damage, distance, radius: 2.15 });
@@ -812,9 +956,9 @@
     function hazard(phase) {
       const pos = player.pos.clone(), top = world.height(pos.x, pos.z);
       pos.y = top === -8 ? player.pos.y : top;
-      const mesh = new T.Mesh(new T.RingGeometry(.12, 2.15, 48), new T.MeshBasicMaterial({ color: phase === 'fly' ? 0xba73fb : 0xff8460, transparent: true, opacity: .42, side: T.DoubleSide, depthWrite: false }));
+      const mesh = new T.Mesh(new T.RingGeometry(.12, 3.2, 48), new T.MeshBasicMaterial({ color: phase === 'fly' ? 0xba73fb : 0xff8460, transparent: true, opacity: .42, side: T.DoubleSide, depthWrite: false }));
       mesh.rotation.x = -Math.PI / 2; mesh.position.copy(pos).add(V(0, .035, 0)); group.add(mesh);
-      hazards.push({ mesh, pos, left: 1.1, damage: phase === 'fly' ? 18 : 22, phase });
+      hazards.push({ mesh, pos, left: 1.1, damage: phase === 'fly' ? 22 : 28, phase });
       emit('dragon_hazard_telegraph', { phase, seconds: 1.1, radius: 2.15, x: pos.x, z: pos.z });
     }
 
@@ -839,7 +983,8 @@
         dragon.phase = phase; emit('dragon_phase', { phase });
         say(phase === 'fly' ? '용이 비행합니다. 활과 화살로 대응하세요.' : '용이 내려왔습니다. 위험 표시를 피해 근접 공격하세요.');
       }
-      const target = phase === 'fly' ? V(Math.sin(dragon.cycle * .52) * 3, 8, -38 + Math.cos(dragon.cycle * .52) * 3) : V(0, 3, -36);
+      const home = dragon.home || { x: 0, z: -38 };
+      const target = phase === 'fly' ? V(home.x + Math.sin(dragon.cycle * .52) * 6, 9, home.z + Math.cos(dragon.cycle * .52) * 6) : V(home.x, 2.5, home.z + 2);
       dragon.pos.lerp(target, 1 - Math.exp(-dt * 2.2)); dragon.rig.root.position.copy(dragon.pos); face(dragon);
       dragon.attackT = (dragon.attackT || 0) - dt;
       if (dragon.attackT <= 0 && !protectedPose(dragon)) {
@@ -904,7 +1049,7 @@
           button.innerHTML = `<span class="slotnum">${index + 1}</span><span class="symbol">${escape(symbol || '◇')}</span><span class="slotlabel">${escape(name(id))}</span><span class="slotcount"></span>`;
           button.addEventListener('click', () => api.choose(id));
           hotbar.appendChild(button);
-          slots.push({ id, button, count: button.querySelector('.slotcount') });
+          slots.push({ id, index, button, count: button.querySelector('.slotcount') });
         });
       }
       const recipes = $('recipes');
@@ -949,11 +1094,14 @@
       html('resources', `나무 <b>${number(inv.wood)}</b> · 돌 <b>${number(inv.stone)}</b> · 철 <b>${number(inv.iron)}</b><br>흙 <b>${number(inv.dirt)}</b> · 화살 <b>${number(inv.arrows)}</b> · 음식 <b>${number(inv.food)}</b>`);
       text('craftInv', inventoryText);
 
-      slots.forEach(({ id, button, count }) => {
+      slots.forEach(({ id, index, button, count }) => {
         const available = typeof api.available === 'function' ? api.available(id) : inv[id];
         button.classList.toggle('active', selected === id);
         button.classList.toggle('unavailable', !available);
         button.setAttribute('aria-pressed', String(selected === id));
+        if (api.baseDamage && api.baseDamage[id] && typeof api.damageFor === 'function') {
+          button.title = `${index + 1} · ${name(id)} · 피해 ${number(api.damageFor(id))}`;
+        }
         const quantity = id === 'bow' ? number(inv.arrows) : id === 'block' ? number(inv.stone) + number(inv.dirt) : inv[id];
         count.textContent = id === 'armor' ? (inv.armorEquipped ? '착용' : inv.armorOwned ? '보유' : '') : typeof quantity === 'number' ? String(quantity) : quantity === true ? '✓' : '';
       });
@@ -971,29 +1119,27 @@
       let objective = '나무와 철을 모아, 출발 준비';
       let hint = '왼쪽 나무 4개 · 오른쪽 바닥 철광석 4개 · 돌 10개. 곡괭이·도끼로 캐고 캠프에서 E로 제작하세요.';
       const prepared = Boolean(inv.sword && inv.bow && inv.armorOwned);
-      const bridged = Boolean(flags.crossed);
-      const climbed = Boolean(flags.climbed);
-      const eyeUsed = Boolean(flags.eyeUsed);
+      const hellEntered = Boolean(flags.hellEntered);
+      const endEntered = Boolean(flags.endEntered);
+      const endOpen = Boolean(flags.endOpen);
+      const inserted = number(flags.eyesInserted);
+      const eyeCount = number(inv.eye);
       const fighting = Boolean(dragon && dragon.active);
-      if (prepared) {
-        objective = '강에 길을 잇고 높은 턱 오르기';
-        hint = '5번 돌 선택 → 강가에서 아래를 보고 우클릭/F. Shift를 누르면 가장자리에서 멈춥니다.';
+      if (prepared && !hellEntered) {
+        objective = '강을 건너 지옥 포탈 찾기';
+        hint = '돌로 다리를 만들고 턱에 발판을 쌓아 올라가세요. 높은 곳 끝에 보라색 포탈이 있습니다.';
       }
-      if (bridged && !climbed) {
-        objective = '직접 만든 발판으로 높은 턱 오르기';
-        hint = '돌이나 나무를 쌓아 발판을 만드세요. Space로 뛰어 올라갈 수 있습니다.';
+      if (hellEntered && !endEntered && !endOpen) {
+        objective = `지옥에서 엔더의 눈 모으기 · ${inserted + eyeCount}/12`;
+        hint = '빛나는 눈을 가까이서 E로 줍고, 앤더 포탈 틀 근처에서 E로 꽂으세요. 용암과 위더를 조심하세요.';
       }
-      if (bridged && climbed) {
-        objective = '적의 움직임을 읽고 전진하기';
-        hint = '적마다 다른 위험을 살피고 전진하세요. 제단 가까이에서 E로 엔더의 눈을 얻습니다.';
+      if (hellEntered && !endEntered && endOpen) {
+        objective = '앤더 포탈이 열렸다 · 안으로 들어가기';
+        hint = '틀 안쪽이 밝게 빛납니다. 그 위로 걸어가세요.';
       }
-      if (inv.eye && !eyeUsed && bridged && climbed) {
-        objective = '엔더의 눈으로 용의 길 찾기';
-        hint = '8번 엔더의 눈을 선택하고 좌클릭하세요. 용의 둥지를 막은 봉인이 풀립니다.';
-      }
-      if (fighting) {
-        objective = '엔더 드래곤 처치';
-        hint = '비행할 때 활로 조준하고, 접근할 때 칼로 공격하세요. 공격 예고를 피하세요.';
+      if (endEntered) {
+        objective = '엔더의 용 처치';
+        hint = '날아다닐 땐 활, 내려앉으면 검·도끼! 거대하니 공격 예고를 잘 피하세요.';
       }
       if (state === 'dead' || state === 'lost') { objective = '이번 생존은 여기까지'; hint = '사망하여 이번 판이 종료되었습니다.'; }
       if (state === 'won' || state === 'win') { objective = '엔더 드래곤 처치 성공'; hint = '직접 만든 길과 준비한 장비로 용을 쓰러뜨렸습니다.'; }
@@ -1039,10 +1185,10 @@
 (async function(){
 'use strict';
 const {THREE:T}=Game3D,$=id=>document.getElementById(id),canvas=$('view'),V=(x=0,y=0,z=0)=>new T.Vector3(x,y,z),clamp=T.MathUtils.clamp;
-const names={pickaxe:'곡괭이',axe:'도끼',sword:'검',bow:'활',block:'돌 / 흙',wood:'나무',food:'음식',eye:'엔더의 눈',armor:'갑옷',hand:'빈손',grass:'잔디',dirt:'흙',stone:'돌',ore:'철광석',log:'통나무',planks:'나무판',leaves:'나뭇잎',zombie:'좀비',skeleton:'스켈레톤',creeper:'크리퍼',enderman:'엔더맨',piglin:'피글린',dragon:'협곡의 용'};
-const slotIds=['pickaxe','axe','sword','bow','block','wood','food','eye','armor'],symbols=['⛏','🪓','⚔','🏹','▧','▤','◆','◉','♜'],baseDamage={pickaxe:8,axe:10,sword:16,bow:22};
+const names={pickaxe:'곡괭이',axe:'도끼',sword:'검',bow:'활',block:'돌 / 흙',wood:'나무',food:'음식',eye:'엔더의 눈',armor:'갑옷',hand:'빈손',grass:'잔디',dirt:'흙',stone:'돌',ore:'철광석',log:'통나무',planks:'나무판',leaves:'나뭇잎',red:'빨간 블록',lava:'용암',obsidian:'흑요석',endstone:'엔드 돌',endframe:'앤더 틀',zombie:'좀비',skeleton:'스켈레톤',creeper:'크리퍼',enderman:'엔더맨',piglin:'피글린',ghast:'가스트',wither:'위더',dragon:'엔더의 용'};
+const slotIds=['pickaxe','axe','sword','bow','block','wood','food','eye','armor'],symbols=['⛏','🪓','⚔','🏹','▧','▤','◆','◉','♜'],baseDamage={pickaxe:8,axe:18,sword:16,bow:22};
 const recipes=[{id:'sword',name:'철검',cost:{wood:1,iron:2},description:'빠른 근접 공격 · 피해 16부터'},{id:'armor',name:'철 갑옷 한 벌',cost:{wood:1,iron:2},description:'받는 피해 45% 감소 · 9번 착탈'},{id:'bow',name:'활 + 화살 24개',cost:{wood:2,stone:2},description:'공중의 용을 공격하는 원거리 무기'},{id:'arrows',name:'화살 16개',cost:{wood:1,stone:1},description:'사용한 화살 보충'},{id:'food',name:'식량 2개',cost:{wood:1},description:'장작을 주고 받은 음식 · 체력 34 회복'}];
-let scene,camera,renderer,world,group,hero,viewRoot,viewItem,viewRig,dragon,gate,eyeObject,ghost,selection,mobs,ui;
+let scene,camera,renderer,world,group,hero,viewRoot,viewItem,viewRig,dragon,ghost,selection,mobs,ui,portalData,eyePickups=[],currentZone=null,portalCD=0,lavaCD=0;
 let state='loading',craftOpen=false,third=false,started=false,audioCtx=null,runId=0;
 let player={pos:V(0,0,10),vy:0,grounded:false,yaw:0,pitch:0,hp:100},inv={},mastery={},stats={},flags={},enemies=[],projectiles=[],effects=[],events=[];
 let selected='pickaxe',keys=new Set(),left=false,drag=false,lastMouse=null,mineKey='',mineProgress=0,bowCharge=0,attackCD=0,placeCD=0,hurtTime=0,toastTime=0,time=0,clockLast=0,frames=0,fps=60,waterCD=0,target=null,placement=null,enemyTarget=null,swing=0;
@@ -1063,64 +1209,77 @@ function choose(id){if(state!=='playing')return;selected=id;mineProgress=0;mineK
 function canCraft(r){return Object.entries(r.cost).every(([k,v])=>inv[k]>=v)&&!(r.id==='armor'?inv.armorOwned:['sword','bow'].includes(r.id)&&inv[r.id]);}
 function craft(r){if(state!=='playing'||!craftOpen||!canCraft(r))return;Object.entries(r.cost).forEach(([k,v])=>inv[k]-=v);if(r.id==='armor'){inv.armorOwned=true;inv.armorEquipped=true;}else if(r.id==='arrows')inv.arrows+=16;else if(r.id==='food')inv.food+=2;else{inv[r.id]=true;if(r.id==='bow')inv.arrows+=24;}stats.crafted++;logs('craft',{id:r.id,cost:r.cost,inventory:{...inv}});sound(660);toast(r.name+' 준비 완료');ui.update();}
 $('closeCraft').onclick=()=>toggleCraft();
-function toggleCraft(){if(state!=='playing')return;if(!craftOpen&&player.pos.distanceTo(V(0,0,10))>5){if(!flags.eyePicked&&player.pos.distanceTo(V(0,3,-26))<3){inv.eye=1;flags.eyePicked=true;eyeObject.visible=false;logs('eyePickup');toast('엔더의 눈 획득 · 8번을 선택하고 사용하세요');return;}toast('제작은 시작 캠프에서 가능합니다');return;}craftOpen=!craftOpen;$('craft').style.display=craftOpen?'flex':'none';clearInput();if(craftOpen)unlock();else lock();ui.update();}
+function tryPickupEye(){for(const p of eyePickups){if(p.taken)continue;if(player.pos.distanceTo(p.pos)<2.6){p.taken=true;group.remove(p.mesh);inv.eye++;logs('eyePickup',{have:inv.eye,inserted:flags.eyesInserted});toast(`엔더의 눈 +1 · 보유 ${inv.eye} · 꽂음 ${flags.eyesInserted}/12`);sound(760,.18,'sine');return true;}}return false;}
+function tryInsertEye(fromUse){const ep=portalData.endPortal;if(player.pos.distanceTo(V(ep.x,ep.y,ep.z))>4.5){if(fromUse)toast('앤더 포탈(지옥) 가까이에서 엔더의 눈을 꽂을 수 있습니다');return false;}if(flags.endOpen){toast('이미 열린 앤더 포탈입니다 · 안으로 들어가세요');return true;}if(inv.eye<=0){toast(`엔더의 눈이 부족합니다 (${flags.eyesInserted}/12) · 지옥 곳곳에서 E로 줍으세요`);return true;}const add=Math.min(inv.eye,12-flags.eyesInserted);inv.eye-=add;flags.eyesInserted+=add;logs('eyeInsert',{added:add,inserted:flags.eyesInserted});toast(`엔더의 눈 ${add}개를 꽂았습니다 · ${flags.eyesInserted}/12`);sound(620,.22,'sine');particles(V(ep.x,ep.y+.6,ep.z),0x9d7ade,20);if(flags.eyesInserted>=12){flags.endOpen=true;portalData.endMesh.visible=true;toast('앤더 포탈이 열렸습니다! 빛나는 바닥으로 걸어가세요');sound(880,.5,'triangle',.04);logs('endPortalOpen');}return true;}
+function interactHint(){for(const p of eyePickups){if(!p.taken&&player.pos.distanceTo(p.pos)<2.6)return 'E · 엔더의 눈 줍기';}const ep=portalData.endPortal;if(player.pos.distanceTo(V(ep.x,ep.y,ep.z))<4.5)return flags.endOpen?'앤더 포탈 · 안으로 걸어가기':`E · 엔더의 눈 꽂기 ${flags.eyesInserted}/12`;return '';}
+function interact(){if(state!=='playing')return;if(tryPickupEye())return;if(tryInsertEye(false))return;toggleCraft();}
+function toggleCraft(){if(state!=='playing')return;if(!craftOpen&&player.pos.distanceTo(V(0,0,10))>5){toast('제작은 시작 캠프에서 가능합니다');return;}craftOpen=!craftOpen;$('craft').style.display=craftOpen?'flex':'none';clearInput();if(craftOpen)unlock();else lock();ui.update();}
 function resetRun(){
  runId++;if(world)scene.remove(world.root);if(group)scene.remove(group);group=new T.Group();scene.add(group);world=new VoxelWorld(scene).build();enemies=[];projectiles=[];effects=[];
- player={pos:V(0,0,10),vy:0,grounded:false,yaw:0,pitch:0,hp:100};inv={wood:0,stone:0,dirt:0,iron:0,food:1,arrows:0,sword:false,bow:false,armorOwned:false,armorEquipped:false,eye:0};mastery={pickaxe:0,axe:0,sword:0,bow:0};stats={mined:0,placed:0,bridgePlaced:0,stairsPlaced:0,crafted:0,kills:0,shots:0,damageTaken:0,effectiveHits:0};flags={crossed:false,climbed:false,eyePicked:false,eyeUsed:false};events=[];time=0;selected='pickaxe';attackCD=placeCD=waterCD=0;clearInput();third=false;craftOpen=false;$('craft').style.display='none';
+ player={pos:V(0,0,10),vy:0,grounded:false,yaw:0,pitch:0,hp:100};inv={wood:0,stone:0,dirt:0,iron:0,food:1,arrows:0,sword:false,bow:false,armorOwned:false,armorEquipped:false,eye:0};mastery={pickaxe:0,axe:0,sword:0,bow:0};stats={mined:0,placed:0,bridgePlaced:0,stairsPlaced:0,crafted:0,kills:0,shots:0,damageTaken:0,effectiveHits:0};flags={crossed:false,climbed:false,hellEntered:false,endEntered:false,endOpen:false,eyesInserted:0};events=[];time=0;selected='pickaxe';attackCD=placeCD=waterCD=0;portalCD=lavaCD=0;currentZone=null;clearInput();third=false;craftOpen=false;$('craft').style.display='none';
  hero=GameAssets.make('hero');group.add(hero.root);hero.play('Idle');hero.root.visible=false;
- dragon={rig:GameAssets.make('dragon'),pos:V(0,8,-38),hp:320,maxHp:320,active:false,phase:'waiting',cycle:0,attackT:3,deathT:0};dragon.rig.root.scale.setScalar(.6);dragon.rig.root.position.copy(dragon.pos);group.add(dragon.rig.root);dragon.rig.play('Fly');
- mobs=MobSystem({T,GameAssets,V,world,group,player,enemies,dragon,flags,state:()=>state,time:()=>time,enemyTarget:()=>enemyTarget,hurt,logs,toast,particles,projectiles,sound,finish});mobs.spawnAll();
- eyeObject=GameAssets.static('eye_of_ender');eyeObject.position.set(0,4,-26);eyeObject.scale.setScalar(.7);group.add(eyeObject);const pedestal=cube(1,.6,1,0x485248);pedestal.position.set(0,3.3,-26);group.add(pedestal);
- gate=new T.Group();for(const x of[-9,9]){const p=cube(1,5,1,0x493356);p.position.set(x,5.5,-30);gate.add(p);}const screen=new T.Mesh(new T.PlaneGeometry(18,5),new T.MeshBasicMaterial({color:0xb471ed,transparent:true,opacity:.24,side:T.DoubleSide}));screen.position.set(0,5.5,-30);gate.add(screen);group.add(gate);
- addLabel('캠프 · E 제작',0,2.5,12.5);addLabel('강 · 돌을 이어 다리 만들기',0,2,2);addLabel('높은 턱 · 발판 2단',0,4.5,-9);addLabel('엔더의 눈 · 가까이서 E',0,6,-26);addLabel('용의 둥지',0,10,-42);
+ dragon={rig:GameAssets.make('dragon'),pos:V(world.metadata.zones.end.center.x,9,world.metadata.zones.end.center.z),hp:960,maxHp:960,active:false,phase:'waiting',cycle:0,attackT:3,deathT:0,home:{x:world.metadata.zones.end.center.x,z:world.metadata.zones.end.center.z}};dragon.rig.root.scale.setScalar(3);dragon.rig.root.position.copy(dragon.pos);group.add(dragon.rig.root);dragon.rig.play('Fly');
+ mobs=MobSystem({T,GameAssets,V,world,group,player,enemies,dragon,flags,state:()=>state,time:()=>time,enemyTarget:()=>enemyTarget,hurt,logs,toast,particles,projectiles,sound,finish});mobs.spawnAll();spawnCustomMobs();
+ const meta=world.metadata,portalsMeta=meta.portals,mkScreen=(x,y,z,w,h,color,opacity,flat)=>{const m=new T.Mesh(new T.PlaneGeometry(w,h),new T.MeshBasicMaterial({color,transparent:true,opacity,side:T.DoubleSide,depthWrite:false}));m.position.set(x,y,z);if(flat)m.rotation.x=-Math.PI/2;group.add(m);return m;};portalData={toHell:portalsMeta.toHell,toHome:portalsMeta.toHome,endPortal:portalsMeta.endPortal,hellSpawn:portalsMeta.toHellSpawn,homeSpawn:portalsMeta.toHomeSpawn,endSpawn:portalsMeta.endSpawn,toHellMesh:mkScreen(portalsMeta.toHell.x,portalsMeta.toHell.y,portalsMeta.toHell.z,3,4,0xb471ed,.32,false),toHomeMesh:mkScreen(portalsMeta.toHome.x,portalsMeta.toHome.y,portalsMeta.toHome.z,3,4,0xb471ed,.45,false),endMesh:mkScreen(portalsMeta.endPortal.x,portalsMeta.endPortal.y+.07,portalsMeta.endPortal.z,3,3,0x5b3ec9,.92,true)};portalData.endMesh.visible=false;eyePickups=meta.eyeSpots.map((s,i)=>{const m=GameAssets.static('eye_of_ender');m.scale.setScalar(.6);m.position.set(s.x,s.y,s.z);group.add(m);return{mesh:m,pos:V(s.x,s.y,s.z),baseY:s.y,phase:i*1.7,taken:false};});updateZone();
+ /*옛 게이트 제거: gate=new T.Group();for(const x of[-24,24]){const p=cube(1,5,1,0x493356);p.position.set(x,5.5,-30);gate.add(p);}const screen=new T.Mesh(new T.PlaneGeometry(48,5),new T.MeshBasicMaterial({color:0xb471ed,transparent:true,opacity:.24,side:T.DoubleSide}));screen.position.set(0,5.5,-30);gate.add(screen);group.add(gate);*/
+ addLabel('캠프 · E 제작',0,2.5,12.5);addLabel('강 · 돌을 이어 다리 만들기',0,2,2);addLabel('높은 턱 · 발판 2단',0,4.5,-9);addLabel('지옥으로 가는 포탈',0,10,-36);addLabel('초원으로 돌아가는 포탈',meta.zones.hell.center.x,8.5,meta.zones.hell.center.z+24);addLabel('앤더 포탈 · 눈 12개',meta.portals.endPortal.x,7,meta.portals.endPortal.z);addLabel('엔더의 둥지',meta.zones.end.center.x,16,meta.zones.end.center.z+22);
  const table=cube(1.8,.65,1.1,0x6e492c);table.position.set(2,.325,12);group.add(table);['armor_helmet','armor_chest','armor_leggings','armor_boots'].forEach((id,i)=>{const m=GameAssets.static(id);m.scale.setScalar(.28);m.position.set(1.4+i*.45,.7,12);group.add(m);});
  ghost=new T.Mesh(new T.BoxGeometry(1.015,1.015,1.015),new T.MeshBasicMaterial({color:0xeed096,wireframe:true,transparent:true,opacity:.8}));group.add(ghost);ghost.visible=false;selection=new T.Mesh(new T.BoxGeometry(1.008,1.008,1.008),new T.MeshBasicMaterial({color:0xf7edc9,wireframe:true}));group.add(selection);selection.visible=false;armView();logs('runStart',{runId});ui.update();
 }
 function begin(){if(state==='loading')return;sound(440);resetRun();state='playing';started=true;$('modal').style.display='none';lock();}
 function pause(){if(state!=='playing'||craftOpen)return;state='paused';clearInput();unlock();ui.showModal('잠깐 쉬어 가기','이 세계와 체력은 그대로 멈춰 있습니다.','계속하기',()=>{state='playing';$('modal').style.display='none';lock();});}
-function finish(won,reason){if(state!=='playing')return;if(won)stats.kills++;state=won?'won':'dead';clearInput();unlock();logs(won?'win':'death',{reason,hp:player.hp,dragonHP:dragon.hp,elapsed:time,stats:{...stats}});$('craft').style.display='none';craftOpen=false;ui.showModal(won?'길 끝에서, 용을 이겼다':'이번 여정은 여기까지',`${won?'용의 체력이 0이 되고 마지막 움직임까지 멈췄습니다.':reason+' · 사망하여 이번 판이 종료되었습니다.'}<div id="endStats">${Math.floor(time/60)}분 ${Math.floor(time%60)}초 · 채굴 ${stats.mined}개 · 설치 ${stats.placed}개<br>처치 ${stats.kills}마리 · 검 피해 ${damageFor('sword')} · 활 피해 ${damageFor('bow')}<br>${won?'직접 만든 다리와 발판이 이 승리를 연결했습니다.':'다시 시작하면 지형·재료·무기 숙련도가 처음으로 돌아갑니다.'}</div>`,'새로운 판 시작',begin);sound(won?880:120,.5,'triangle',.05);}
+function finish(won,reason){if(state!=='playing')return;if(won)stats.kills++;state=won?'won':'dead';clearInput();unlock();logs(won?'win':'death',{reason,hp:player.hp,dragonHP:dragon.hp,elapsed:time,stats:{...stats}});$('craft').style.display='none';craftOpen=false;ui.showModal(won?'길 끝에서, 용을 이겼다':'이번 여정은 여기까지',`${won?'용의 체력이 0이 되고 마지막 움직임까지 멈췄습니다.':reason+' · 사망하여 이번 판이 종료되었습니다.'}<div id="endStats">${Math.floor(time/60)}분 ${Math.floor(time%60)}초 · 채굴 ${stats.mined}개 · 설치 ${stats.placed}개<br>처치 ${stats.kills}마리 · 검 피해 ${damageFor('sword')} · 도끼 피해 ${damageFor('axe')} · 활 피해 ${damageFor('bow')}<br>${won?'직접 만든 다리와 발판이 이 승리를 연결했습니다.':'다시 시작하면 지형·재료·무기 숙련도가 처음으로 돌아갑니다.'}</div>`,'새로운 판 시작',begin);sound(won?880:120,.5,'triangle',.05);}
 function hurt(amount,reason){if(state!=='playing'||craftOpen||amount<=0)return;const applied=amount*(inv.armorEquipped?.55:1);player.hp=Math.max(0,player.hp-applied);hurtTime=.5;stats.damageTaken+=applied;logs('damage',{raw:amount,applied,armor:inv.armorEquipped,reason,hp:player.hp});sound(100,.12,'sawtooth');if(player.hp<=0)finish(false,reason);}
 function boundsAt(pos){return{min:V(pos.x-.28,pos.y+.02,pos.z-.28),max:V(pos.x+.28,pos.y+1.72,pos.z+.28)};}
 function collides(pos){const b=boundsAt(pos);return world.collideBox(b.min,b.max);}
 function movePlayer(dt){
  const turn=1.65*dt;player.yaw+=(keys.has('ArrowLeft')?turn:0)-(keys.has('ArrowRight')?turn:0);player.pitch=clamp(player.pitch+(keys.has('ArrowUp')?turn:0)-(keys.has('ArrowDown')?turn:0),-1.45,1.45);const f=(keys.has('KeyW')?1:0)-(keys.has('KeyS')?1:0),s=(keys.has('KeyD')?1:0)-(keys.has('KeyA')?1:0),sneak=keys.has('ShiftLeft')||keys.has('ShiftRight'),moving=f||s,dir=V(-Math.sin(player.yaw)*f+Math.cos(player.yaw)*s,0,-Math.cos(player.yaw)*f-Math.sin(player.yaw)*s);if(moving)dir.normalize().multiplyScalar((sneak?1.9:4.1)*dt*(player.pos.y<-1?.45:1));
- for(const axis of['x','z']){const p=player.pos.clone();p[axis]+=dir[axis];if(!collides(p)&&(!sneak||!player.grounded||world.height(p.x,p.z)>=player.pos.y-.55))player.pos[axis]=p[axis];}if(!flags.eyeUsed&&player.pos.z<-29.3)player.pos.z=-29.3;
+ for(const axis of['x','z']){const p=player.pos.clone();p[axis]+=dir[axis];if(!collides(p)&&(!sneak||!player.grounded||world.height(p.x,p.z)>=player.pos.y-.55))player.pos[axis]=p[axis];}
  if(keys.has('Space')&&player.grounded){player.vy=6.8;player.grounded=false;sound(190,.05,'triangle');}player.vy-=18*dt;const dy=player.vy*dt,p=player.pos.clone();p.y+=dy;if(collides(p)){if(dy<0){player.grounded=true;player.pos.y=Math.round(player.pos.y);}player.vy=0;}else{player.pos.y=p.y;player.grounded=false;}
  const floor=world.height(player.pos.x,player.pos.z);if(player.vy<=0&&player.pos.y>=floor-.22&&player.pos.y<=floor+.08){player.pos.y=floor;player.vy=0;player.grounded=true;}
- if(player.pos.y<-7){player.hp=0;finish(false,'협곡 아래로 추락');return;}waterCD-=dt;if(player.pos.y<-1.2&&player.pos.z>=0&&player.pos.z<5&&waterCD<=0){waterCD=1;hurt(12,'차가운 강물');}
- if(!flags.crossed&&player.pos.z<0&&player.pos.y>-.5){flags.crossed=true;logs('riverCrossed',{bridgeBlocks:stats.bridgePlaced});toast('강 건너 도착 · 높은 턱에 발판을 만들어 올라가세요');}if(!flags.climbed&&player.pos.z<-9&&player.pos.y>=2.8){flags.climbed=true;logs('plateauClimbed',{stairsBlocks:stats.stairsPlaced});toast('탐험 구역 도착 · 적을 살피며 엔더의 눈을 찾으세요');}
+ if(player.pos.y<-7){player.hp=0;finish(false,'심연으로 추락');return;}waterCD-=dt;lavaCD-=dt;if(player.pos.y<-1.2&&player.pos.z>=0&&player.pos.z<5&&player.pos.x>-30&&player.pos.x<30&&waterCD<=0){waterCD=1;hurt(12,'차가운 강물');}const liftLava=world.get(Math.floor(player.pos.x),Math.floor(player.pos.y+.2),Math.floor(player.pos.z))==='lava'||world.get(Math.floor(player.pos.x),Math.floor(player.pos.y+.9),Math.floor(player.pos.z))==='lava';if(lavaCD<=0&&liftLava){lavaCD=.8;hurt(42,'뜨거운 용암');}
+ const inMeadow=player.pos.x>=-25&&player.pos.x<=25&&player.pos.z>=-45&&player.pos.z<=15;if(inMeadow&&!flags.crossed&&player.pos.z<0&&player.pos.y>-.5){flags.crossed=true;logs('riverCrossed',{bridgeBlocks:stats.bridgePlaced});toast('강 건너 도착 · 높은 턱에 발판을 만들어 올라가세요');}if(inMeadow&&!flags.climbed&&player.pos.z<-9&&player.pos.y>=2.8){flags.climbed=true;logs('plateauClimbed',{stairsBlocks:stats.stairsPlaced});toast('높은 지대 도착 · 끝의 보라 포탈로 지옥에 갈 수 있습니다');}
  hero.root.position.copy(player.pos);hero.root.rotation.y=player.yaw+Math.PI;hero.root.visible=third;action(hero,left&&baseDamage[selected]?selected==='pickaxe'?'Mine':selected==='bow'?'Bow':'Attack':moving?'Walk':'Idle');hero.update(dt);
 }
-function updateCamera(){camera.rotation.order='YXZ';camera.rotation.set(player.pitch,player.yaw,0);camera.position.copy(player.pos).add(V(0,1.62,0));if(third)camera.position.addScaledVector(V(0,0,1).applyEuler(camera.rotation),3.4).add(V(0,.7,0));camera.updateMatrixWorld();viewRoot.visible=!third&&state==='playing';viewRoot.position.set(.43,-.43+Math.sin(time*7)*.012,-.72);viewRoot.rotation.z=-Math.sin(swing*9)*.45;}
+function updateCamera(){camera.rotation.order='YXZ';camera.rotation.set(player.pitch,player.yaw,0);camera.position.copy(player.pos).add(V(0,1.62,0));if(third)camera.position.addScaledVector(V(0,0,1).applyEuler(camera.rotation),3.4).add(V(0,.7,0));camera.updateMatrixWorld();viewRoot.visible=!third&&state==='playing';viewRoot.position.set(.43,-.43+Math.sin(time*7)*.012,-.72-Math.sin(swing*9)*.24);viewRoot.rotation.x=Math.sin(swing*9)*.30;viewRoot.rotation.z=-Math.sin(swing*9)*.85;}
 function forward(){return V(-Math.sin(player.yaw)*Math.cos(player.pitch),Math.sin(player.pitch),-Math.cos(player.yaw)*Math.cos(player.pitch));}
-function entitySphere(e){return new T.Sphere(e.pos.clone().add(V(0,e.id==='creeper'?.8:e.id==='enderman'?1.5:1,0)),e.id==='enderman'?.8:.7);}
+function entitySphere(e){const cy=e.id==='creeper'?.8:e.id==='enderman'?1.5:e.id==='ghast'?.9:e.id==='wither'?1.2:1,r=e.id==='enderman'?.8:e.id==='ghast'?1.5:e.id==='wither'?1.1:.7;return new T.Sphere(e.pos.clone().add(V(0,cy,0)),r);}
 function nearestEnemy(origin,dir,max){const ray=new T.Ray(origin,dir);let result=null;for(const e of enemies){if(e.dead)continue;const sphere=entitySphere(e),point=sphere.containsPoint(origin)?origin:ray.intersectSphere(sphere,V());if(point){const d=point.distanceTo(origin);if(d<=max&&(!result||d<result.distance))result={entity:e,distance:d};}}if(dragon.active&&dragon.hp>0){const sphere=new T.Sphere(dragon.pos.clone().add(V(0,1.1,dragon.phase==='land'?1.3:0)),dragon.phase==='land'?2.3:2.1),point=sphere.containsPoint(origin)?origin:ray.intersectSphere(sphere,V());if(point){const d=point.distanceTo(origin);if(d<=max&&(!result||d<result.distance))result={entity:dragon,distance:d};}}return result;}
 function updateTarget(){const origin=player.pos.clone().add(V(0,1.62,0)),dir=forward();raycaster.set(origin,dir);target=world.pick(raycaster,5);enemyTarget=nearestEnemy(origin,dir,40);if(enemyTarget){const obstacle=world.pick(raycaster,enemyTarget.distance);if(obstacle&&obstacle.distance<enemyTarget.distance-.05)enemyTarget=null;}selection.visible=!!target&&!(enemyTarget&&enemyTarget.distance<target.distance);if(selection.visible)selection.position.set(target.x+.5,target.y+.5,target.z+.5);placement=null;
  if(['block','wood'].includes(selected)&&available(selected)){if(target){const p={x:target.x+target.normal.x,y:target.y+target.normal.y,z:target.z+target.normal.z};if(validPlacement(p))placement=p;}
  // Edge helper extends the same-height block along the cardinal viewing direction.
  if(player.pitch<-.18&&player.grounded){const dx=-Math.sin(player.yaw),dz=-Math.cos(player.yaw),fx=Math.floor(player.pos.x),fz=Math.floor(player.pos.z),ay=Math.round(player.pos.y)-1,p={x:fx+(Math.abs(dx)>Math.abs(dz)?Math.sign(dx):0),y:ay,z:fz+(Math.abs(dz)>=Math.abs(dx)?Math.sign(dz):0)};if(validPlacement(p)&&!VoxelWorld.isSolid(world.get(p.x,p.y,p.z))&&VoxelWorld.isSolid(world.get(fx,ay,fz)))placement=p;}}
- ghost.visible=!!placement;if(placement)ghost.position.set(placement.x+.5,placement.y+.5,placement.z+.5);$('target').textContent=enemyTarget?`${names[enemyTarget.entity.id||'dragon']} · ${Math.ceil(enemyTarget.entity.hp)} HP`:target?names[target.type]:!flags.eyePicked&&player.pos.distanceTo(V(0,3,-26))<3?'E · 엔더의 눈 줍기':'';
+ ghost.visible=!!placement;if(placement)ghost.position.set(placement.x+.5,placement.y+.5,placement.z+.5);$('target').textContent=enemyTarget?`${names[enemyTarget.entity.id||'dragon']} · ${Math.ceil(enemyTarget.entity.hp)} HP`:target?names[target.type]:interactHint();
 }
 function validPlacement(p){if(VoxelWorld.isSolid(world.get(p.x,p.y,p.z)))return false;if(player.pos.distanceTo(V(p.x+.5,p.y+.5,p.z+.5))>5)return false;const b=boundsAt(player.pos);return !(b.min.x<p.x+1&&b.max.x>p.x&&b.min.y<p.y+1&&b.max.y>p.y&&b.min.z<p.z+1&&b.max.z>p.z);}
 function place(){if(state!=='playing'||craftOpen||placeCD>0||!placement||!available(selected))return;const material=selected==='wood'?'wood':inv.stone?'stone':'dirt',type=material==='wood'?'planks':material;if(!validPlacement(placement)||inv[material]<=0)return;const p={...placement};if(world.set(p.x,p.y,p.z,type)){inv[material]--;stats.placed++;if(p.z>=0&&p.z<5&&p.y===-1)stats.bridgePlaced++;if(p.z>=-11&&p.z<=-6&&p.y>=0)stats.stairsPlaced++;logs('place',{...p,blockType:type,remaining:inv[material]});world.rebuild();placeCD=.18;swing=.28;sound(220);armView();}}
 function particles(pos,color,count=8){for(let i=0;i<count;i++){const m=cube(.1,.1,.1,color);m.position.copy(pos);group.add(m);effects.push({mesh:m,v:V((Math.random()-.5)*3,Math.random()*3,(Math.random()-.5)*3),life:.5});}}
-function mine(dt){if(!left||!target||enemyTarget||!['pickaxe','axe','hand','sword'].includes(selected)){mineProgress=0;mineKey='';return;}const key=[target.x,target.y,target.z].join(',');if(key!==mineKey){mineKey=key;mineProgress=0;}const wood=['log','planks','leaves'].includes(target.type),hard=['stone','ore'].includes(target.type),duration=wood?(selected==='axe'?.38:1.25):hard?(selected==='pickaxe'?.48:1.6):.42;mineProgress+=dt/duration;swing=.2;if(mineProgress>=1){const p={x:target.x,y:target.y,z:target.z},type=world.remove(p.x,p.y,p.z);if(type){const gain=['log','planks'].includes(type)?'wood':type==='ore'?'iron':type==='stone'?'stone':['grass','dirt'].includes(type)?'dirt':null;if(gain)inv[gain]++;if(type==='ore')inv.stone++;stats.mined++;logs('mine',{...p,blockType:type,gain,tool:selected});particles(V(p.x+.5,p.y+.5,p.z+.5),wood?0xb3844e:0xa3aa99);world.rebuild();sound(wood?210:460);armView();}mineProgress=0;mineKey='';}}
-function hitEntity(e,weapon){if(state!=='playing'||e.dead||e.hp<=0)return false;if(e===dragon&&((e.phase==='fly'&&weapon!=='bow')||(e.phase==='land'&&weapon==='bow'))){toast(e.phase==='land'?'용이 접은 날개는 화살을 튕깁니다 · 검으로 공격하세요':'공중의 용은 활로 공격하세요');logs('blockedHit',{target:'dragon',weapon,phase:e.phase});return false;}const amount=damageFor(weapon),before=mastery[weapon]||0;mastery[weapon]=before+1;e.hp=Math.max(0,e.hp-amount);stats.effectiveHits++;logs('hit',{target:e.id||'dragon',weapon,damage:amount,hp:e.hp,hits:mastery[weapon],phase:e.phase||null});if(Math.floor(before/3)!==Math.floor(mastery[weapon]/3)&&before<12){toast(`${names[weapon]} 숙련 증가 · 실제 피해 ${amount} → ${damageFor(weapon)}`);logs('mastery',{weapon,damageBefore:amount,damageAfter:damageFor(weapon)});}sound(weapon==='bow'?630:410);particles(e.pos.clone().add(V(0,1,0)),e===dragon?0xb78bc9:0xe3b88b);
+function mine(dt){if(!left||!target||enemyTarget||!['pickaxe','axe','hand','sword'].includes(selected)){mineProgress=0;mineKey='';return;}const key=[target.x,target.y,target.z].join(',');if(key!==mineKey){mineKey=key;mineProgress=0;}if(target.type==='obsidian'||target.type==='endframe'){mineProgress=0;return;}const wood=['log','planks','leaves'].includes(target.type),hard=['stone','ore'].includes(target.type),red=target.type==='red',end=target.type==='endstone',duration=wood?(selected==='axe'?.38:1.25):hard?(selected==='pickaxe'?.48:1.6):red?(selected==='pickaxe'?.32:selected==='axe'?.55:1.1):end?(selected==='pickaxe'?.7:2):.42;mineProgress+=dt/duration;swing=.2;if(mineProgress>=1){const p={x:target.x,y:target.y,z:target.z},type=world.remove(p.x,p.y,p.z);if(type){const gain=['log','planks'].includes(type)?'wood':type==='ore'?'iron':type==='stone'?'stone':type==='red'?'dirt':type==='endstone'?'stone':['grass','dirt'].includes(type)?'dirt':null;if(gain)inv[gain]++;if(type==='ore')inv.stone++;stats.mined++;logs('mine',{...p,blockType:type,gain,tool:selected});particles(V(p.x+.5,p.y+.5,p.z+.5),wood?0xb3844e:0xa3aa99);world.rebuild();sound(wood?210:460);armView();}mineProgress=0;mineKey='';}}
+function hitEntity(e,weapon){if(state!=='playing'||e.dead||e.hp<=0)return false;if(e===dragon&&((e.phase==='fly'&&weapon!=='bow')||(e.phase==='land'&&weapon==='bow'))){toast(e.phase==='land'?'용이 접은 날개는 화살을 튕깁니다 · 검으로 공격하세요':'공중의 용은 활로 공격하세요');logs('blockedHit',{target:'dragon',weapon,phase:e.phase});return false;}const amount=damageFor(weapon),before=mastery[weapon]||0;mastery[weapon]=before+1;e.hp=Math.max(0,e.hp-amount);stats.effectiveHits++;logs('hit',{target:e.id||'dragon',weapon,damage:amount,hp:e.hp,hits:mastery[weapon],phase:e.phase||null});if(Math.floor(before/3)!==Math.floor(mastery[weapon]/3)&&before<12){toast(`${names[weapon]} 숙련 증가 · 실제 피해 ${amount} → ${damageFor(weapon)}`);logs('mastery',{weapon,damageBefore:amount,damageAfter:damageFor(weapon)});}sound(weapon==='bow'?630:410);particles(e.pos.clone().add(V(0,1,0)),e===dragon?0xb78bc9:0xe3b88b);if(e.custom){if(e.hp<=0)customDeath(e);return true;}
  if(e!==dragon){e.aggro=true;e.rig.play(e.hp<=0?'Death':'Hit',{loop:false});if(e.hp<=0){e.dead=true;e.deathT=0;stats.kills++;inv.food++;inv.arrows+=e.id==='skeleton'?8:0;logs('kill',{id:e.id,dropFood:1});toast(names[e.id]+' 처치 · 음식 +1');}}else if(e.hp<=0){e.phase='dying';e.deathT=0;e.rig.play('Death',{loop:false});logs('dragonDeathStarted');}return true;
 }
-function melee(){if(attackCD>0||!baseDamage[selected]||selected==='bow'||!available(selected))return;attackCD=selected==='axe'?.75:.5;swing=.35;const origin=player.pos.clone().add(V(0,1.62,0)),dir=forward(),limit=enemyTarget?.entity===dragon?4.2:3;raycaster.set(origin,dir);const wall=world.pick(raycaster,limit),hit=nearestEnemy(origin,dir,limit);if(hit&&(!wall||hit.distance<wall.distance+.04))hitEntity(hit.entity,selected);else sound(170,.04,'triangle');}
-function useItem(){if(state!=='playing'||craftOpen)return;if(selected==='food'){if(inv.food&&player.hp<100&&attackCD<=0){const before=player.hp;inv.food--;player.hp=Math.min(100,player.hp+34);attackCD=.7;logs('eat',{healed:player.hp-before,remaining:inv.food});toast('음식으로 체력 회복');sound(520);armView();}return;}if(selected==='armor'){if(inv.armorOwned){inv.armorEquipped=!inv.armorEquipped;logs('armorToggle',{equipped:inv.armorEquipped});toast(inv.armorEquipped?'갑옷 착용 · 받는 피해 45% 감소':'갑옷 해제');}return;}if(selected==='eye'){if(inv.eye>0&&!flags.eyeUsed){inv.eye--;flags.eyeUsed=true;dragon.active=true;dragon.phase='fly';dragon.cycle=0;gate.visible=false;logs('eyeUse');toast('봉인이 풀렸습니다 · 공중에는 활, 착지하면 검');sound(740,.35,'sine');armView();}return;}if(selected==='bow'){if(inv.bow&&inv.arrows>0){bowCharge=.001;viewRig?.play('DrawRelease',{loop:false,speed:.8});}else toast('활과 화살을 캠프에서 준비하세요');return;}melee();}
+function melee(){if(attackCD>0||!baseDamage[selected]||selected==='bow'||!available(selected))return;attackCD=selected==='axe'?.7:.5;swing=.55;const origin=player.pos.clone().add(V(0,1.62,0)),dir=forward(),limit=enemyTarget?.entity===dragon?6.5:3;raycaster.set(origin,dir);const wall=world.pick(raycaster,limit),hit=nearestEnemy(origin,dir,limit);if(hit&&(!wall||hit.distance<wall.distance+.04))hitEntity(hit.entity,selected);else sound(170,.04,'triangle');}
+function useItem(){if(state!=='playing'||craftOpen)return;if(selected==='food'){if(inv.food&&player.hp<100&&attackCD<=0){const before=player.hp;inv.food--;player.hp=Math.min(100,player.hp+34);attackCD=.7;logs('eat',{healed:player.hp-before,remaining:inv.food});toast('음식으로 체력 회복');sound(520);armView();}return;}if(selected==='armor'){if(inv.armorOwned){inv.armorEquipped=!inv.armorEquipped;logs('armorToggle',{equipped:inv.armorEquipped});toast(inv.armorEquipped?'갑옷 착용 · 받는 피해 45% 감소':'갑옷 해제');}return;}if(selected==='eye'){tryInsertEye(true);return;}if(selected==='bow'){if(inv.bow&&inv.arrows>0){bowCharge=.001;viewRig?.play('DrawRelease',{loop:false,speed:.8});}else toast('활과 화살을 캠프에서 준비하세요');return;}melee();}
 function shoot(){if(state!=='playing'||craftOpen||selected!=='bow'||bowCharge<.15||!inv.bow||inv.arrows<=0){bowCharge=0;return;}const pos=player.pos.clone().add(V(0,1.55,0)).addScaledVector(forward(),.45),velocity=forward().multiplyScalar(28),mesh=GameAssets.static('arrow');mesh.scale.setScalar(.75);mesh.position.copy(pos);group.add(mesh);projectiles.push({mesh,pos,v:velocity,life:3,owner:'player',weapon:'bow'});inv.arrows--;stats.shots++;logs('shot',{arrows:inv.arrows,charge:Math.min(1,bowCharge)});bowCharge=0;sound(300,.1,'triangle');}
-function updateProjectiles(dt){for(let i=projectiles.length-1;i>=0;i--){const p=projectiles[i],before=p.pos.clone(),step=p.v.clone().multiplyScalar(dt),dist=step.length(),dir=step.clone().normalize();raycaster.set(before,dir);const wall=world.pick(raycaster,dist+.02);let done=!!wall;p.pos.add(step);p.v.y-=1.3*dt;p.life-=dt;if(p.owner==='player'){const h=nearestEnemy(before,dir,dist+.02);if(h&&(!wall||h.distance<wall.distance)){hitEntity(h.entity,p.weapon);done=true;}}else{const point=new T.Ray(before,dir).intersectSphere(new T.Sphere(player.pos.clone().add(V(0,1,0)),.55),V());if(point&&point.distanceTo(before)<=dist+.02&&(!wall||point.distanceTo(before)<wall.distance)){hurt(p.damage,'스켈레톤의 화살');done=true;}}p.mesh.position.copy(p.pos);p.mesh.quaternion.setFromUnitVectors(V(0,1,0),p.v.clone().normalize());if(done||p.life<0){group.remove(p.mesh);projectiles.splice(i,1);}if(state!=='playing')break;}}
+function zoneAt(p){const zs=world.metadata.zones;for(const key of['overworld','hell','end']){const z=zs[key];if(p.x>=z.minX&&p.x<=z.maxX&&p.z>=z.minZ&&p.z<=z.maxZ)return key;}return currentZone||'overworld';}
+function updateZone(){const z=zoneAt(player.pos);if(z===currentZone)return;currentZone=z;const style={overworld:[0x8aadb9,30,75],hell:[0x2a0e0a,10,48],end:[0x1c1636,28,100]}[z];scene.background=new T.Color(style[0]);scene.fog.color.set(style[0]);scene.fog.near=style[1];scene.fog.far=style[2];logs('zone',{zone:z});}
+function usePortal(dest){portalCD=1.6;sound(520,.3,'sine');particles(player.pos.clone().add(V(0,1,0)),0x9d7ade,18);if(dest==='hell'){const s=portalData.hellSpawn;player.pos.set(s.x,s.y,s.z);player.vy=0;player.yaw=0;flags.hellEntered=true;toast('지옥에 도착했습니다 · 용암과 위더를 조심하세요');sound(140,.4,'sawtooth');}else if(dest==='home'){const s=portalData.homeSpawn;player.pos.set(s.x,s.y,s.z);player.vy=0;player.yaw=Math.PI;toast('초원으로 돌아왔습니다');}else{const s=portalData.endSpawn;player.pos.set(s.x,s.y,s.z);player.vy=0;player.yaw=0;if(!flags.endEntered){flags.endEntered=true;dragon.active=true;dragon.phase='fly';dragon.cycle=0;toast('엔더 · 엔더의 용이 깨어났습니다!');sound(95,.5,'sawtooth',.05);}else toast('엔더의 둥지');}currentZone=null;updateZone();particles(player.pos.clone().add(V(0,1,0)),0x9d7ade,18);logs('portal',{to:dest,position:{...player.pos}});}
+function checkPortals(){if(portalCD>0||state!=='playing')return;const px=player.pos.x,py=player.pos.y+1,pz=player.pos.z,th=portalData.toHell,ho=portalData.toHome,ep=portalData.endPortal;if(Math.abs(px-th.x)<1.8&&Math.abs(pz-th.z)<.9&&Math.abs(py-th.y)<2.4){usePortal('hell');return;}if(Math.abs(px-ho.x)<1.8&&Math.abs(pz-ho.z)<.9&&Math.abs(py-ho.y)<2.4){usePortal('home');return;}if(flags.endOpen&&Math.abs(px-ep.x)<1.9&&Math.abs(pz-ep.z)<1.9&&Math.abs(py-(ep.y+.6))<2.2)usePortal('end');}
+function makeGhast(spot){const root=new T.Group();const body=cube(2.3,2.3,2.3,0xf0f0f0);root.add(body);const fc=document.createElement('canvas');fc.width=fc.height=256;const g2=fc.getContext('2d');g2.fillStyle='#f0f0f0';g2.fillRect(0,0,256,256);g2.fillStyle='#5b5b63';g2.fillRect(56,84,52,30);g2.fillRect(148,84,52,30);g2.fillRect(84,150,88,58);g2.fillStyle='#f0f0f0';g2.fillRect(96,150,12,58);g2.fillRect(124,150,12,58);g2.fillRect(148,150,12,58);const face=new T.Mesh(new T.PlaneGeometry(2.15,2.15),new T.MeshBasicMaterial({map:new T.CanvasTexture(fc)}));face.position.set(0,0,1.17);root.add(face);const tentacles=[];for(let i=0;i<9;i++){const tm=cube(.2,1.3,.2,0xdadada);tm.position.set(-.7+(i%3)*.7,-1.7,-.7+Math.floor(i/3)*.7);root.add(tm);tentacles.push(tm);}root.position.set(spot.x,spot.y,spot.z);group.add(root);return{id:'ghast',custom:true,root,tentacles,pos:V(spot.x,spot.y,spot.z),baseX:spot.x,baseY:spot.y,baseZ:spot.z,hp:44,maxHp:44,dead:false,t:Math.random()*10,phase:Math.random()*6.28,cd:1.5+Math.random()*2};}
+function makeWither(spot){const root=new T.Group();const body=cube(1.0,1.1,.85,0x232329);body.position.y=.9;root.add(body);const skullA=cube(.62,.62,.62,0x2b2b33);skullA.position.set(-.62,1.55,.02);root.add(skullA);const skullB=cube(.62,.62,.62,0x2b2b33);skullB.position.set(.62,1.55,.02);root.add(skullB);const skullC=cube(.72,.72,.72,0x30303a);skullC.position.set(0,2.1,.05);root.add(skullC);const e1=cube(.09,.09,.06,0xff4038);e1.position.set(-.17,2.13,.42);root.add(e1);const e2=cube(.09,.09,.06,0xff4038);e2.position.set(.17,2.13,.42);root.add(e2);const rib=cube(.7,.16,.6,0x2b2b33);rib.position.y=.32;root.add(rib);root.scale.setScalar(1.15);root.position.set(spot.x,spot.y,spot.z);group.add(root);return{id:'wither',custom:true,root,pos:V(spot.x,spot.y,spot.z),baseX:spot.x,baseY:spot.y,baseZ:spot.z,hp:180,maxHp:180,dead:false,t:0,cd:3,burst:0,burstT:0};}
+function spawnCustomMobs(){for(const s of world.metadata.ghastSpots)enemies.push(makeGhast(s));enemies.push(makeWither(world.metadata.witherSpot));}
+function customDeath(e){e.dead=true;stats.kills++;group.remove(e.root);particles(e.pos.clone(),e.id==='wither'?0x7c5295:0xd8d8d8,e.id==='wither'?40:20);if(e.id==='wither'){inv.eye+=2;toast('위더 처치 · 엔더의 눈 +2');}else{inv.food+=1;toast('가스트 처치 · 음식 +1');}logs('kill',{id:e.id});sound(e.id==='wither'?150:520,.4,'sawtooth');}
+function updateCustomMobs(dt){for(const e of enemies){if(!e.custom||e.dead)continue;e.t+=dt;if(e.id==='ghast'){e.pos.set(e.baseX+Math.sin(e.t*.16+e.phase)*2.2,e.baseY+Math.sin(e.t*.9+e.phase)*.5,e.baseZ+Math.cos(e.t*.13+e.phase)*2.2);e.root.position.copy(e.pos);e.root.rotation.y=Math.atan2(player.pos.x-e.pos.x,player.pos.z-e.pos.z);for(let i=2;i<11;i++){const m=e.root.children[i];if(m)m.rotation.x=Math.sin(e.t*1.6+i)*.22;}e.cd-=dt;if(e.cd<=0&&player.hp>0&&e.pos.distanceTo(player.pos)<26){e.cd=4.2+Math.random()*2.2;const from=e.pos.clone().add(V(0,-.4,0)),dir=player.pos.clone().add(V(0,1.1,0)).sub(from).normalize(),mesh=cube(.42,.42,.42,0xff8a1e);mesh.position.copy(from);group.add(mesh);projectiles.push({mesh,pos:from,v:dir.multiplyScalar(10),life:4.5,owner:'enemy',damage:10,reason:'가스트의 화염구'});sound(150,.3,'sine');}}else if(e.id==='wither'){e.pos.set(e.baseX+Math.sin(e.t*.5)*1.4,e.baseY+Math.sin(e.t*.8)*.45,e.baseZ+Math.cos(e.t*.43)*1.4);e.root.position.copy(e.pos);e.root.rotation.y=Math.atan2(player.pos.x-e.pos.x,player.pos.z-e.pos.z);e.cd-=dt;if(e.cd<=0&&player.hp>0&&e.pos.distanceTo(player.pos)<30){e.cd=5.5;e.burst=3;e.burstT=0;}if(e.burst>0){e.burstT-=dt;if(e.burstT<=0){e.burst--;e.burstT=.32;const from=e.pos.clone().add(V(0,1.6,0)),dir=player.pos.clone().add(V(0,1.1,0)).sub(from).normalize(),mesh=cube(.5,.5,.5,0x2a2033);mesh.position.copy(from);group.add(mesh);projectiles.push({mesh,pos:from,v:dir.multiplyScalar(13),life:4,owner:'enemy',damage:14,reason:'위더의 해골'});sound(110,.25,'sawtooth');}}}}}
+function updateProjectiles(dt){for(let i=projectiles.length-1;i>=0;i--){const p=projectiles[i],before=p.pos.clone(),step=p.v.clone().multiplyScalar(dt),dist=step.length(),dir=step.clone().normalize();raycaster.set(before,dir);const wall=world.pick(raycaster,dist+.02);let done=!!wall;p.pos.add(step);p.v.y-=1.3*dt;p.life-=dt;if(p.owner==='player'){const h=nearestEnemy(before,dir,dist+.02);if(h&&(!wall||h.distance<wall.distance)){hitEntity(h.entity,p.weapon);done=true;}}else{const point=new T.Ray(before,dir).intersectSphere(new T.Sphere(player.pos.clone().add(V(0,1,0)),.55),V());if(point&&point.distanceTo(before)<=dist+.02&&(!wall||point.distanceTo(before)<wall.distance)){hurt(p.damage,p.reason||'스켈레톤의 화살');done=true;}}p.mesh.position.copy(p.pos);p.mesh.quaternion.setFromUnitVectors(V(0,1,0),p.v.clone().normalize());if(done||p.life<0){group.remove(p.mesh);projectiles.splice(i,1);}if(state!=='playing')break;}}
 function updateEffects(dt){for(let i=effects.length-1;i>=0;i--){const e=effects[i];e.life-=dt;e.v.y-=9*dt;e.mesh.position.addScaledVector(e.v,dt);if(e.life<=0){group.remove(e.mesh);e.mesh.geometry.dispose();e.mesh.material.dispose();effects.splice(i,1);}}}
-function snapshot(){return JSON.parse(JSON.stringify({ready:started||state==='menu',mode:state,runId,time,position:player.pos,yaw:player.yaw,pitch:player.pitch,hp:player.hp,grounded:player.grounded,inventory:inv,selected,mastery,damage:Object.fromEntries(Object.keys(baseDamage).map(k=>[k,damageFor(k)])),flags,stats,target:target?{x:target.x,y:target.y,z:target.z,type:target.type}:null,placement,enemies:enemies.map(e=>({id:e.id,position:e.pos,hp:e.hp,aggro:e.aggro,dead:e.dead,fuse:e.fuse})),dragon:dragon?{position:dragon.pos,hp:dragon.hp,phase:dragon.phase,active:dragon.active}:null,events,fps,worldCells:world?.cells.size,craftOpen,third}));}
-window.__gameDebug=Object.freeze({snapshot,worldManifest:()=>JSON.parse(JSON.stringify(world?.metadata)),rules:Object.freeze({damage:(base,hits)=>base+Math.min(4,Math.floor(hits/3))*4,received:(raw,equipped)=>raw*(equipped?.55:1)})});
+function snapshot(){return JSON.parse(JSON.stringify({ready:started||state==='menu',mode:state,runId,time,position:player.pos,yaw:player.yaw,pitch:player.pitch,hp:player.hp,grounded:player.grounded,inventory:inv,selected,mastery,damage:Object.fromEntries(Object.keys(baseDamage).map(k=>[k,damageFor(k)])),flags,stats,target:target?{x:target.x,y:target.y,z:target.z,type:target.type}:null,placement,enemies:enemies.map(e=>({id:e.id,position:e.pos,hp:e.hp,aggro:e.aggro,dead:e.dead,fuse:e.fuse})),dragon:dragon?{position:dragon.pos,hp:dragon.hp,phase:dragon.phase,active:dragon.active}:null,events,fps,worldCells:world?.cells.size,craftOpen,third,zone:currentZone}));}
+window.__gameDebug=Object.freeze({snapshot,worldManifest:()=>JSON.parse(JSON.stringify(world?.metadata)),debugTeleport:(x,y,z)=>{if(world&&Number.isFinite(x)&&Number.isFinite(y)&&Number.isFinite(z)){player.pos.set(x,y,z);player.vy=0;player.grounded=false;}},debugPortals:()=>({zone:currentZone,portalCD,endOpen:flags.endOpen,endPortal:portalData?{...portalData.endPortal}:null,endSpawn:portalData?{...portalData.endSpawn}:null,toHell:portalData?{...portalData.toHell}:null,toHome:portalData?{...portalData.toHome}:null,pos:{x:player.pos.x,y:player.pos.y,z:player.pos.z}}),rules:Object.freeze({damage:(base,hits)=>base+Math.min(4,Math.floor(hits/3))*4,received:(raw,equipped)=>raw*(equipped?.55:1)})});
 try{
  renderer=new T.WebGLRenderer({canvas,antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer.setSize(innerWidth,innerHeight);renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1.2;scene=new T.Scene();scene.background=new T.Color(0x8aadb9);scene.fog=new T.Fog(0x8aadb9,30,75);camera=new T.PerspectiveCamera(72,innerWidth/innerHeight,.06,110);scene.add(camera);scene.add(new T.HemisphereLight(0xd7ebff,0x6a6849,2.1));const sun=new T.DirectionalLight(0xffe4bc,2.5);sun.position.set(-12,24,15);scene.add(sun);viewRoot=new T.Group();camera.add(viewRoot);const sleeve=cube(.16,.32,.2,0x171c1c);sleeve.position.set(.07,-.18,.2);viewRoot.add(sleeve);const hand=cube(.15,.12,.18,0xeee8d7);hand.position.set(.07,0,.17);viewRoot.add(hand);
  ui=GameUI({T,V,GameAssets,$,names,slotIds,symbols,recipes,baseDamage,state:()=>state,inv:()=>inv,mastery:()=>mastery,player:()=>player,dragon:()=>dragon,flags:()=>flags,stats:()=>stats,time:()=>time,selected:()=>selected,craftOpen:()=>craftOpen,mineProgress:()=>mineProgress,bowCharge:()=>bowCharge,choose,craft,canCraft,damageFor,available,begin});ui.init();await GameAssets.load((n,total,id)=>{$('loading').textContent=`내장 모델 ${n} / ${total} · ${names[id]||id}`;});resetRun();state='menu';$('begin').disabled=false;$('begin').textContent='여정 시작';$('loading').textContent='모든 자산 준비 완료 · 인터넷 없이 플레이';$('begin').onclick=begin;camera.position.set(8,8,14);camera.lookAt(0,1,-6);
- addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);});addEventListener('keydown',e=>{if(['Space','ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.code))e.preventDefault();if(e.repeat&&['KeyE','KeyV','KeyF','Escape'].includes(e.code))return;if(e.code==='Escape'){if(craftOpen)toggleCraft();else if(state==='playing')pause();else if(state==='paused')$('continue').click();return;}if(state!=='playing')return;if(e.code==='KeyE'){toggleCraft();return;}if(craftOpen)return;keys.add(e.code);if(/^Digit[1-9]$/.test(e.code))choose(slotIds[Number(e.code.slice(-1))-1]);if(e.code==='KeyQ')choose('hand');if(e.code==='KeyF')place();if(e.code==='KeyV'){third=!third;logs('avatarView',{third});}});addEventListener('keyup',e=>keys.delete(e.code));addEventListener('blur',()=>{clearInput();if(state==='playing'&&!craftOpen)pause();});
+ addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);});addEventListener('keydown',e=>{if(['Space','ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.code))e.preventDefault();if(e.repeat&&['KeyE','KeyV','KeyF','Escape'].includes(e.code))return;if(e.code==='Escape'){if(craftOpen)toggleCraft();else if(state==='playing')pause();else if(state==='paused')$('continue').click();return;}if(state!=='playing')return;if(e.code==='KeyE'){interact();return;}if(craftOpen)return;keys.add(e.code);if(/^Digit[1-9]$/.test(e.code))choose(slotIds[Number(e.code.slice(-1))-1]);if(e.code==='KeyQ')choose('hand');if(e.code==='KeyF')place();if(e.code==='KeyV'){third=!third;logs('avatarView',{third});}});addEventListener('keyup',e=>keys.delete(e.code));addEventListener('blur',()=>{clearInput();if(state==='playing'&&!craftOpen)pause();});
  canvas.addEventListener('contextmenu',e=>e.preventDefault());canvas.addEventListener('mousedown',e=>{if(state!=='playing'||craftOpen)return;if(e.button===2){place();return;}if(e.button===0){left=true;drag=true;lastMouse={x:e.clientX,y:e.clientY};useItem();}});addEventListener('mouseup',e=>{if(e.button===0){if(left&&selected==='bow')shoot();left=false;drag=false;mineProgress=0;mineKey='';bowCharge=0;}});addEventListener('mousemove',e=>{if(state!=='playing'||craftOpen)return;if(document.pointerLockElement===canvas||drag){const dx=document.pointerLockElement===canvas?e.movementX:lastMouse?e.clientX-lastMouse.x:0,dy=document.pointerLockElement===canvas?e.movementY:lastMouse?e.clientY-lastMouse.y:0;player.yaw-=dx*.002;player.pitch=clamp(player.pitch-dy*.002,-1.45,1.45);lastMouse={x:e.clientX,y:e.clientY};}});
- function frame(ms){requestAnimationFrame(frame);const dt=Math.min(.04,(ms-clockLast)/1000||.016);clockLast=ms;frames++;fps=fps*.97+(1/dt)*.03;if(state==='playing'&&!craftOpen){time+=dt;attackCD=Math.max(0,attackCD-dt);placeCD=Math.max(0,placeCD-dt);swing=Math.max(0,swing-dt);movePlayer(dt);if(state==='playing'){updateCamera();updateTarget();mine(dt);if(left&&enemyTarget&&selected!=='bow')melee();if(left&&bowCharge>0)bowCharge+=dt;viewRig?.update(dt);mobs.update(dt);}if(state==='playing')updateProjectiles(dt);if(state==='playing')mobs.dragonUpdate(dt);updateEffects(dt);eyeObject.rotation.y=time;eyeObject.position.y=4+Math.sin(time*2)*.1;}if(state==='playing')updateCamera();hurtTime=Math.max(0,hurtTime-dt);$('hurt').style.opacity=hurtTime*1.5;toastTime-=dt;if(toastTime<=0)$('toast').textContent='';if(frames%5===0)ui.update();renderer.render(scene,camera);}
+ function frame(ms){requestAnimationFrame(frame);const dt=Math.min(.04,(ms-clockLast)/1000||.016);clockLast=ms;frames++;fps=fps*.97+(1/dt)*.03;if(state==='playing'&&!craftOpen){time+=dt;attackCD=Math.max(0,attackCD-dt);placeCD=Math.max(0,placeCD-dt);swing=Math.max(0,swing-dt);portalCD=Math.max(0,portalCD-dt);movePlayer(dt);if(state==='playing')checkPortals();if(state==='playing'){updateCamera();updateTarget();mine(dt);if(left&&enemyTarget&&selected!=='bow')melee();if(left&&bowCharge>0)bowCharge+=dt;viewRig?.update(dt);mobs.update(dt);updateCustomMobs(dt);}if(state==='playing')updateProjectiles(dt);if(state==='playing')mobs.dragonUpdate(dt);updateEffects(dt);for(const p of eyePickups){if(!p.taken){p.mesh.rotation.y=time*1.4;p.mesh.position.y=p.baseY+Math.sin(time*2.2+p.phase)*.16;}}portalData.toHellMesh.material.opacity=.24+Math.abs(Math.sin(time*2.6))*.16;portalData.toHomeMesh.material.opacity=.34+Math.abs(Math.sin(time*2.6+1.2))*.16;if(portalData.endMesh.visible)portalData.endMesh.material.opacity=.75+Math.abs(Math.sin(time*3))*.2;updateZone();}if(state==='playing')updateCamera();hurtTime=Math.max(0,hurtTime-dt);$('hurt').style.opacity=hurtTime*1.5;toastTime-=dt;if(toastTime<=0)$('toast').textContent='';if(frames%5===0)ui.update();renderer.render(scene,camera);}
  requestAnimationFrame(frame);
 }catch(error){console.error(error);state='error';$('error').style.display='block';$('error').textContent='3D 화면을 열지 못했습니다.\n'+error.message+'\n이 HTML 파일을 Chrome에서 다시 열어 주세요.';}
 })();
